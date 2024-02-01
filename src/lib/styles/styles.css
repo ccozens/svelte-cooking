@@ -1,0 +1,43 @@
+/* styles.css */
+
+/* Variables using postcss-preset-env */
+:root {
+	--main-color: #3498db;
+	--background-color: #191970;
+  --font-color: #FFDB58;
+}
+
+/* Nesting using postcss-preset-env */
+body {
+	background-color: var(--background-color);
+	color: var(--main-color);
+}
+
+/* Custom property set and usage */
+.card {
+	--card-padding: 20px;
+	padding: var(--card-padding);
+	border: 1px solid var(--main-color);
+  background-color: var(--background-color);
+  color: var(--font-color);
+	font-size: 20px;
+	/* nested media queries using postcss-preset-env */
+	@media screen and (max-width: 800px) {
+		font-size: 14px;
+	}
+}
+
+/* Minification using cssnano */
+.button {
+	background-color: var(--main-color);
+	color: var(--font-color);
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+
+  /* nested pseudo selectors using postcss-preset-env */
+  &:hover {
+    background-color: color(var(--main-color) blackness(+10%));
+  }
+}
