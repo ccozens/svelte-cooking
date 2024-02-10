@@ -10,4 +10,5 @@
 
 ## issues
 - husky caused cloudlfare pages to fail to build. Solution: [add a `.husky/install.mjs` and modify the `prepare` script as per the husky docs`](https://typicode.github.io/husky/how-to.html#ci-server-and-docker).
+- [how to add open props to sveltekit with postcss](https://www.sveltekitchen.dev/recipes/open-props)
 -

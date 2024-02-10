@@ -38,9 +38,15 @@ devDependencies:
   eslint-plugin-svelte:
     specifier: ^2.35.1
     version: 2.35.1(eslint@8.56.0)(svelte@4.2.9)
+  open-props:
+    specifier: ^1.6.18
+    version: 1.6.18
   postcss:
     specifier: ^8.4.32
     version: 8.4.33
+  postcss-jit-props:
+    specifier: ^1.0.14
+    version: 1.0.14(postcss@8.4.33)
   postcss-load-config:
     specifier: ^5.0.2
     version: 5.0.2(postcss@8.4.33)
@@ -2179,6 +2185,10 @@ packages:
       wrappy: 1.0.2
     dev: true
 
+  /open-props@1.6.18:
+    resolution: {integrity: sha512-xhkbGo6vFdYHWR9mt81p4mlPoRLQHunA6XJAuQ2cUyvoOGKGxDj8dGgXDIbR1EMJVyHPxU1AbtfbloAIRLHWKw==}
+    dev: true
+
   /optionator@0.9.3:
     resolution: {integrity: sha512-JjCoypp+jKn1ttEFExxhetCKeJt9zhAgAve5FXHixTvFDW/5aEktX9bufBKLRRMdU7bNtpLfcGu94B3cdEJgjg==}
     engines: {node: '>= 0.8.0'}
@@ -2478,6 +2488,16 @@ packages:
     dependencies:
       postcss: 8.4.33
       postcss-value-parser: 4.2.0
+    dev: true
+
+  /postcss-jit-props@1.0.14(postcss@8.4.33):
+    resolution: {integrity: sha512-GimU4wen29Qr0DbDaAuWrj4NcErYR5x1rxcEFuPVAwF2HEZALydA8tpTMWEyThK7T2bwFTMFMA4G70pL55xUbw==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      postcss: ^8.2.8
+    dependencies:
+      postcss: 8.4.33
+      tiny-glob: 0.2.9
     dev: true
 
   /postcss-lab-function@6.0.9(postcss@8.4.33):
