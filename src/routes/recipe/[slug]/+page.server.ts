@@ -6,17 +6,12 @@ import type { Recipe } from '$lib/types';
 const typedRecipes: { [key: string]: Recipe } = recipes;
 
 export const load: PageServerLoad = async ({ params }) => {
-  const { slug } = params;
-  console.log('slug', slug);
-console.log('typedRecipes', typedRecipes);
-  function getRecipe(slug: string) {
-    return typedRecipes[slug];
-  };
+	const { slug } = params;
+	function getRecipe(slug: string) {
+		return typedRecipes[slug];
+	}
 
-  const found = getRecipe('greenFritters');
-  console.log('found', found);
-
-        return {
-            recipe: getRecipe(slug),
-        }
+	return {
+		recipe: getRecipe(slug)
+	};
 };
