@@ -1,6 +1,5 @@
 /* Write your global styles here, in PostCSS syntax */
 
-
 html {
 	block-size: 100%;
 	color-scheme: light dark;
@@ -22,16 +21,19 @@ html {
 
 
     /* sizes */
-    --border-radius: 0.5rem;
-    --border-width: 1px;
-    --size-1: 1rem;
-    --size-2: 2rem;
-    --size-3: 3rem;
-    --size-4: 4rem;
+    /* --border-radius: 0.5rem; */
+    /* --border-width: 1px; */
+    /* --size-1: 1rem; */
+    /* --size-2: 2rem; */
+    /* --size-3: 3rem; */
+    /* --size-4: 4rem; */
 }
 
 body {
-	min-block-size: 100%;
-	display: grid;
-	place-content: center;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-4);
+    line-height: 1.5;
+    color: var(--text-1);
+    background-color: var(--gradient-10);
+    margin: 0;
 }

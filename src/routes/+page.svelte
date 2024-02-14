@@ -5,12 +5,12 @@
 
 	// components
 	import List from '$lib/components/List.svelte';
-
+    import Header from '$lib/components/Header.svelte';
     // data
 	export let data: PageData;
 	const namesAndSlugs: NameAndSlug[] = data.props;
 </script>
 
-	<h1>Recipes</h1>
 
+<Header />
 <List items={namesAndSlugs} />
