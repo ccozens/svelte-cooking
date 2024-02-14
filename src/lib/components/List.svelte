@@ -21,6 +21,6 @@
     .list {
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: var(--size-3);
     }
 </style>
