@@ -15,8 +15,7 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--size-2);
-		background: ;
-		border: 1px solid var(--highlight);
+		border: 1px solid var(--lime-5);
 		padding: var(--size-4);
         margin: var(--size-1) auto;
 		border-radius: var(--size-1);
@@ -31,8 +30,9 @@
             text-transform: capitalize;
         }
 
-        &:hover {
-            background: var(--surface-hover);
+        &:hover, &:active {
+            background: var(--gradient-30);
+            border: 1px solid var(--teal-12);
         }
 
         @media (min-width: 768px) {
