@@ -4,7 +4,7 @@
 	import type { NameAndSlug } from '$lib/types';
 
 	// components
-	import List from '$lib/components/List.svelte';
+	import RecipeList from '$lib/components/RecipeList.svelte';
     import Header from '$lib/components/Header.svelte';
     // data
 	export let data: PageData;
@@ -13,4 +13,4 @@
 
 
 <Header />
-<List items={namesAndSlugs} />
+<RecipeList items={namesAndSlugs} />

@@ -15,10 +15,10 @@
 		display: flex;
 		flex-direction: column;
 		gap: var(--size-2);
-		border: 1px solid var(--lime-5);
+		border: var(--border-size-2) solid var(--lime-5);
 		padding: var(--size-4);
         margin: var(--size-1) auto;
-		border-radius: var(--size-1);
+		border-radius: var(--radius);
 		box-shadow: var(--size-2);
         width: 80%;
 
@@ -32,7 +32,7 @@
 
         &:hover, &:active {
             background: var(--gradient-30);
-            border: 1px solid var(--teal-12);
+            border: var(--border-size-2) solid var(--teal-12);
         }
 
         @media (min-width: 768px) {

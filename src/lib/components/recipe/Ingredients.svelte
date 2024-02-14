@@ -1,14 +1,18 @@
 <script lang="ts">
-    export let ingredients: string[];
+	// components
+	import List from '$lib/components/common/List.svelte';
 
+	// data
+	export let ingredients: string[];
 </script>
 
-<ul>
-    {#each ingredients as ingredient}
-        <li>{ingredient}</li>
-    {/each}
-</ul>
+<h3>Ingredients</h3>
+<List>
+	<ul>
+		{#each ingredients as ingredient}
+			<li>{ingredient}</li>
+		{/each}
+	</ul>
+</List>
 
-<!-- <style lang="postcss">
 
-</style> -->

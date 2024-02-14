@@ -1,13 +1,17 @@
 <script lang="ts">
-export let steps: string[];
+	// components
+	import Step from './Step.svelte';
+	import List from '$lib/components/common/List.svelte';
+
+	// data
+	export let steps: string[];
 </script>
 
-<ol>
-    {#each steps as step}
-        <li>{step}</li>
-    {/each}
-</ol>
-
-<!-- <style lang="postcss">
-
-</style> -->
+<h3>Steps</h3>
+<List>
+	<ol>
+		{#each steps as step}
+			<Step {step} />
+		{/each}
+	</ol>
+</List>
