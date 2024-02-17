@@ -1,6 +1,6 @@
 <script lang="ts">
 	// components
-	import List from '$lib/components/common/List.svelte';
+	import { List } from '$lib/components/common';
 
 	// data
 	export let ingredients: string[];
@@ -14,5 +14,3 @@
 		{/each}
 	</ul>
 </List>
-
-

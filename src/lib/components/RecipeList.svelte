@@ -3,8 +3,8 @@
 	import type { NameAndSlug } from '$lib/types';
 
 	// components
-	import List from '$lib/components/common/List.svelte';
-	import ListItem from '$lib/components/ListItem.svelte';
+	import { List } from '$lib/components/common';
+	import { ListItem } from '$lib/components';
 
 	// data
 	export let items: NameAndSlug[];

@@ -1,7 +1,7 @@
 <script lang="ts">
 	// components
 	import Step from './Step.svelte';
-	import List from '$lib/components/common/List.svelte';
+	import { List } from '$lib/components/common';
 
 	// data
 	export let steps: string[];
