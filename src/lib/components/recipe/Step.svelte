@@ -6,12 +6,8 @@
 	export let step: string;
 </script>
 
-<Button>
-	<li>{step}</li>
-</Button>
-
-<style lang="postcss">
-	li {
-		list-style: none;
-	}
-</style>
+<li>
+	<Button>
+		{step}
+	</Button>
+</li>

@@ -22,8 +22,12 @@ html {
 
 body {
     font-family: var(--font-sans);
-    font-size: var(--font-size-4);
+    font-size: var(--font-size-fluid-2);
     line-height: 1.5;
     color: var(--text-1);
     margin: 0;
+
+    @media screen and (min-width: 768px) {
+        font-size: var(--font-size-fluid-1);
+    }
 }
