@@ -15,11 +15,3 @@
 		<ListItem {item} />
 	{/each}
 </List>
-
-<style lang="postcss">
-	.list {
-		display: flex;
-		flex-direction: column;
-		gap: var(--size-3);
-	}
-</style>
