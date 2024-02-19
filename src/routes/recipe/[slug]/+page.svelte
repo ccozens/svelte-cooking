@@ -11,7 +11,7 @@
 	const { name, ingredients, steps } = data.recipe;
 </script>
 
-<ScreenWakeLock />
+<!-- <ScreenWakeLock /> -->
 <Title {name} />
 <Ingredients {ingredients} />
 <StepList {steps} />

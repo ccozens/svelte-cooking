@@ -1,10 +1,17 @@
 <script lang="ts">
-    export let step: string;
+	// components
+	import { Button } from '$lib/components/common';
+
+	// data
+	export let step: string;
 </script>
 
-<li>{step}</li>
+<Button>
+	<li>{step}</li>
+</Button>
 
-
-<!-- <style lang="postcss">
-
-</style> -->
+<style lang="postcss">
+	li {
+		list-style: none;
+	}
+</style>
