@@ -1,5 +1,10 @@
+<script lang="ts">
+	let { children } = $props();
+
+</script>
+
 <div class="list">
-	<slot />
+	{@render children()}
 </div>
 
 <style lang="postcss">
