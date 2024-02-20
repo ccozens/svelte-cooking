@@ -1,6 +1,6 @@
 <script lang="ts">
 	// create done flag
-	let { done = false } = $props();
+	let { children, done = false } = $props();
 
 	function handleClick() {
 		done = !done;
@@ -8,7 +8,7 @@
 </script>
 
 <button on:click={handleClick} class:done>
-	<slot>Button</slot>
+	{@render children()}
 </button>
 
 <style lang="postcss">
