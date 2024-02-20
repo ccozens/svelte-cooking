@@ -6,7 +6,7 @@
 	import { ScreenWakeLock } from '$lib/components/common';
 	import { Title, Ingredients, StepList } from '$lib/components/recipe';
 	// data
-	export let data: PageData;
+	let { data } = $props();
 
 	const { name, ingredients, steps } = data.recipe;
 </script>
