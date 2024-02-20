@@ -1,6 +1,6 @@
 <script lang="ts">
 	// create done flag
-	export let done = false;
+	let { done = false } = $props();
 
 	function handleClick() {
 		done = !done;
