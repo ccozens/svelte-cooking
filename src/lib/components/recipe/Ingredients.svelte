@@ -3,7 +3,7 @@
 	import { List } from '$lib/components/common';
 
 	// data
-	let { ingredients } = $props();
+	let { ingredients } = $props<{ingredients: string[]}>();
 </script>
 
 <h3>Ingredients</h3>

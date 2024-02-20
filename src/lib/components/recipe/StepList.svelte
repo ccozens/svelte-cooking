@@ -4,7 +4,7 @@
 	import { List } from '$lib/components/common';
 
 	// data
-	let { steps } = $props();
+	let { steps } = $props<{ steps: string[] }>();
 </script>
 
 <h3>Steps</h3>
