@@ -7,7 +7,7 @@
 	import { ListItem } from '$lib/components';
 
 	// data
-	export let items: NameAndSlug[];
+	let { items } = $props<{ items: NameAndSlug[] }>();
 </script>
 
 <List>
