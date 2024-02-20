@@ -6,7 +6,7 @@
 	// components
 	import { Header, RecipeList } from '$lib/components';
 	// data
-	export let data: PageData;
+	let { data } = $props();
 	const namesAndSlugs: NameAndSlug[] = data.props;
 </script>
 
