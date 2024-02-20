@@ -3,7 +3,7 @@
 	import { Button } from '$lib/components/common';
 
 	// data
-	export let step: string;
+	let { step = ''} = $props();
 </script>
 
 <li>
