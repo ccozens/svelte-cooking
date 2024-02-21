@@ -8,6 +8,8 @@
 	// data
 	export let data: PageData;
 	const namesAndSlugs: NameAndSlug[] = data.props;
+
+
 </script>
 
 <Header />

@@ -1,5 +1,6 @@
 export interface Recipe {
-    name: string;
-    ingredients: string[];
-    steps: string[];
-    }
+	name: string;
+	source: string;
+	ingredients: string[];
+	steps: string[];
+}
