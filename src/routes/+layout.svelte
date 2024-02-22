@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
 	import '../app.pcss';
-	let { children } = $props();
+	import type { Snippet } from 'svelte';
+	let { children } = $props<{ children: Snippet }>();
 </script>
 
 {@render children()}

@@ -1,6 +1,8 @@
 <script lang="ts">
+	import type { Snippet } from 'svelte';
+
 	// create done flag
-	let { children, done = false } = $props();
+	let { children, done = false } = $props<{children: Snippet, done: boolean}>();
 
 	function handleClick() {
 		done = !done;
