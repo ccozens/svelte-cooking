@@ -2,14 +2,14 @@
 	import type { Snippet } from 'svelte';
 
 	// create done flag
-	let { children, done = false } = $props<{children: Snippet, done: boolean}>();
-
-	function handleClick() {
-		done = !done;
-	}
+	let {
+		children,
+		done,
+		onclick = () => {}
+	} = $props<{ children: Snippet; done: boolean; onclick: () => void }>();
 </script>
 
-<button on:click={handleClick} class:done>
+<button {onclick} class:done>
 	{@render children()}
 </button>
 

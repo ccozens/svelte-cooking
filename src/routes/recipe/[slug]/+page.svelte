@@ -1,7 +1,4 @@
 <script lang="ts">
-	// types
-	import type { PageData } from './$types';
-
 	// components
 	import { ScreenWakeLock } from '$lib/components/common';
 	import { Title, Ingredients, StepList } from '$lib/components/recipe';
@@ -11,7 +8,7 @@
 	const { name, source, ingredients, steps } = data.recipe;
 </script>
 
-<ScreenWakeLock />
+<!-- <ScreenWakeLock /> -->
 <Title {name} {source} />
 <Ingredients {ingredients} />
 <StepList {steps} />
