@@ -8,11 +8,11 @@
 	// data
 	let { data } = $props();
 
-	const { name, ingredients, steps } = data.recipe;
+	const { name, source, ingredients, steps } = data.recipe;
 </script>
 
-<!-- <ScreenWakeLock /> -->
-<Title {name} />
+<ScreenWakeLock />
+<Title {name} {source} />
 <Ingredients {ingredients} />
 <StepList {steps} />
 

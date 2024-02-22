@@ -8,6 +8,8 @@
 	// data
 	let { data } = $props();
 	const namesAndSlugs: NameAndSlug[] = data.props;
+
+
 </script>
 
 <Header />
