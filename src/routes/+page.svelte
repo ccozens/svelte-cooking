@@ -8,9 +8,10 @@
 	// data
 	let { data } = $props();
 	const namesAndSlugs: NameAndSlug[] = data.props;
-
+	const dbData = data.result;
 
 </script>
 
 <Header />
 <RecipeList items={namesAndSlugs} />
+
