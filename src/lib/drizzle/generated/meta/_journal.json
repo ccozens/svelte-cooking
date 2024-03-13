@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1710343212410,
+      "tag": "0000_aberrant_zemo",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1710343719631,
+      "tag": "0001_reflective_scarlet_witch",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1710344384548,
+      "tag": "0002_adorable_logan",
+      "breakpoints": true
+    }
+  ]
+}

@@ -8,7 +8,8 @@ export const load: LayoutServerLoad = async () => {
 	const sql = neon(DRIZZLE_DATABASE_URL);
 	const db = drizzle(sql, { schema });
 
-	const result = await db.query.products.findMany();
+	const result = await db.query.recipes.findMany();
 
+	console.log(result);
 	return { result };
 };
