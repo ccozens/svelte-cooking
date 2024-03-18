@@ -7,8 +7,8 @@
 	import { Header, RecipeList } from '$lib/components';
 	// data
 	let { data } = $props();
-	const namesAndSlugs: NameAndSlug[] = data.props;
-	// const dbData = data.result;
+	const namesAndSlugs: NameAndSlug[] = data.namesAndSlugs;
+	const all_recipes = data.all_recipes;
 </script>
 
 <Header />
