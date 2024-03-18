@@ -1,6 +1,7 @@
 export interface Recipe {
-	name: string;
+	recipe_id: number;
+	recipe_name: string;
 	source: string;
-	ingredients: string[];
-	steps: string[];
+	ingredients: unknown;
+	steps: unknown;
 }

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { NameAndSlug } from '$lib/types';
+	import type { IdAndNameAndSlug } from '$lib/types';
 
-	let { item } = $props<{ item: NameAndSlug }>();
+	let { item } = $props<{ item: IdAndNameAndSlug }>();
 </script>
 
 <div class="list-item">

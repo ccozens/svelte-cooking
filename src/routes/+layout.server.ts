@@ -2,7 +2,7 @@ import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { DRIZZLE_DATABASE_URL } from '$env/static/private';
 import type { LayoutServerLoad } from './$types';
-import type { NameAndSlug } from '$lib/types';
+import type { Recipe, IdAndNameAndSlug } from '$lib/types';
 
 import * as schema from '$lib/drizzle/schema';
 
@@ -10,24 +10,28 @@ export const load: LayoutServerLoad = async () => {
 	const sql = neon(DRIZZLE_DATABASE_URL);
 	const db = drizzle(sql, { schema });
 
-	const all_recipes = await db.query.recipes.findMany();
+	const all_recipes: Recipe[] = await db.query.recipes.findMany();
 
-	// extract names into array
-	const names: string[] = [];
-	all_recipes.forEach((recipe) => names.push(recipe.recipe_name));
+	// extract recipe_id and recipe_name into array
+	const id_and_names: [number, string][] = [];
+	all_recipes.forEach((recipe) => id_and_names.push([recipe.recipe_id, recipe.recipe_name]));
+
+
 
 	// generate a slug in camelCase from the name and generate a slug array
-	const slugs = names.map((name) => {
-		return name.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
+	const slugs = id_and_names.map((name) => {
+		return name[1].toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
 	});
 
 	// join names and slug arrays into a single object
-	const namesAndSlugs: NameAndSlug[] = names.map((name, index) => {
+	const id_and_names_and_slugs: IdAndNameAndSlug[] = id_and_names.map((id_and_name, index) => {
 		return {
-			name: name,
+			id: id_and_name[0],
+			name: id_and_name[1],
 			slug: slugs[index]
 		};
 	});
 
-	return { all_recipes, namesAndSlugs };
+
+	return { all_recipes, id_and_names_and_slugs };
 };

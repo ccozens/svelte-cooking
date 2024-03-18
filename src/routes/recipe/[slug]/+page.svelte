@@ -5,13 +5,18 @@
 	// data
 	let { data } = $props();
 
-	const { name, source, ingredients, steps } = data.recipe;
+	// const { recipe_name, source, ingredients, steps } = data.recipe;
+	const { recipe_name, source, ingredients, steps } = data.recipe;
 </script>
 
-<ScreenWakeLock />
-<Title {name} {source} />
-<Ingredients {ingredients} />
-<StepList {steps} />
+{recipe_name}
+{source}
+{ingredients}
+{steps}
+<!-- <ScreenWakeLock /> -->
+<!-- <Title {recipe_name} {source} /> -->
+<!-- <Ingredients {ingredients} /> -->
+<!-- <StepList {steps} /> -->
 
 <!-- <style lang="postcss">
 

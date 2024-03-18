@@ -1,8 +1,8 @@
 <script lang="ts">
-	let { name, source } = $props<{ name: string, source: string }>();
+	let { recipe_name, source } = $props<{ recipe_name: string, source: string }>();
 </script>
 
-<h2>{name}</h2>
+<h2>{recipe_name}</h2>
 <cite
 	>From
 	{#if source.includes('http')}

@@ -2,4 +2,4 @@
 export * from './Recipe';
 
 // NameAndSlug interface
-export * from './NameAndSlug';
+export * from './IdAndNameAndSlug';
