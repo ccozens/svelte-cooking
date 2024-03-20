@@ -6,10 +6,9 @@
 	let { data } = $props();
 
 	const { recipe_name, source, ingredients, steps } = data.recipe;
-	// const { recipe_name, source, ingredients, steps } = data.recipe;
 </script>
 
-<!-- <ScreenWakeLock /> -->
+<ScreenWakeLock />
 <Title {recipe_name} {source} />
 <Ingredients {ingredients} />
 <StepList {steps} />
