@@ -8,6 +8,7 @@ import * as schema from '$lib/drizzle/schema';
 
 export const load: LayoutServerLoad = async () => {
 	const sql = neon(DRIZZLE_DATABASE_URL);
+	// @ts-ignore
 	const db = drizzle(sql, { schema });
 
 	const all_recipes: Recipe[] = await db.query.recipes.findMany();

@@ -3,23 +3,34 @@ import type { Recipe } from '$lib/types';
 
 export const load: PageServerLoad = async ({ params, parent }) => {
 	const { slug } = params;
-	const { all_recipes, namesAndSlugs } = await parent();
+	const { all_recipes, id_and_names_and_slugs } = await parent();
 
-	// function lookupRecipeId(slug: string) {
-	// 	return all_recipes[slug];
-	// }
+	//  declare functions
 
 	function getRecipeName(slug: string) {
-		return namesAndSlugs.find((nameAndSlug) => nameAndSlug.slug === slug);
-	}
+		const recipeIdNameSlug = id_and_names_and_slugs.find(
+			(id_and_name_and_slug) => id_and_name_and_slug.slug === slug
+		);
 
-	const recipeName = getRecipeName(slug);
+		if (!recipeIdNameSlug) {
+			throw new Error(`Recipe with slug ${slug} not found`);
+		}
+		return recipeIdNameSlug.name;
+	}
 
 	function getRecipe(recipeName: string) {
-		return all_recipes.find((recipe) => recipe.recipe_name === recipeName);
+		const recipeData = all_recipes.find((recipe) => recipe.recipe_name === recipeName);
+
+		if (!recipeData) {
+			throw new Error(`Recipe with name ${recipeName} not found`);
+		}
+
+		return recipeData;
 	}
 
-	const recipe: Recipe = getRecipe(slug);
+	// run functions
+	const recipeName = getRecipeName(slug);
+	const recipe: Recipe = getRecipe(recipeName);
 
 	return {
 		recipe
