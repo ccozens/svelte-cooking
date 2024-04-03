@@ -1,16 +1,34 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import FormField from '$lib/components/common/FormField.svelte';
 </script>
 
 <form method="POST" use:enhance>
-	<label for="name">Name</label>
-	<input type="text" id="name" name="name" required />
-	<label for="source">Source</label>
-	<input type="text" id="source" name="source" required />
-	<label for="ingredients">Ingredients</label>
-	<textarea id="ingredients" name="ingredients" required></textarea>
-	<label for="steps">Steps</label>
-	<textarea id="steps" name="steps" required></textarea>
+	<FormField label="Name" type="text" id="name" name="name" placeholder="Recipe name" required />
+	<FormField
+		label="Source"
+		type="text"
+		id="source"
+		name="source"
+		placeholder="Recipe URL, book page, etc"
+		required
+	/>
+	<FormField
+		label="Ingredients"
+		type="textarea"
+		id="ingredients"
+		name="ingredients"
+		placeholder="Paste in ingredients- the app will format them"
+		required
+	/>
+	<FormField
+		label="Instructions"
+		type="textarea"
+		id="instructions"
+		name="instructions"
+		placeholder="Paste in instructions - the app will format them"
+		required
+	/>
 	<button type="submit">Submit</button>
 </form>
 
@@ -18,16 +36,18 @@
 	form {
 		display: grid;
 		gap: 1rem;
-        padding: 1rem;
+		padding: 1rem;
 		margin: 1rem;
 
-        input {
-            padding: 0.5rem;
-            height: 4vh;
-        }
-		textarea {
-            padding: 0.5rem;
-			height: 20vh;
+		& button {
+			background: var(--gradient-30);
+			border: var(--border-size-2) solid var(--teal-12);
+			border-radius: var(--radius);
+			box-shadow: var(--size-2);
+			padding: var(--size-2);
+			font-size: var(--font-size-3);
+			text-transform: uppercase;
+			cursor: pointer;
 		}
 	}
 </style>
