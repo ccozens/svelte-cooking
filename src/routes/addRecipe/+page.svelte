@@ -22,11 +22,11 @@
 		required
 	/>
 	<FormField
-		label="Instructions"
+		label="Steps"
 		type="textarea"
-		id="instructions"
-		name="instructions"
-		placeholder="Paste in instructions - the app will format them"
+		id="steps"
+		name="steps"
+		placeholder="Paste in steps - the app will format them"
 		required
 	/>
 	<button type="submit">Submit</button>
