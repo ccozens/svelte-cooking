@@ -1,12 +1,8 @@
 import type { Actions } from './$types';
 import { fail } from '@sveltejs/kit';
 import { PASSWORD } from '$env/static/private';
-import type {} from './$types';
-
-export const load: LayoutServerLoad = async ({ parent }) => {
-	const { db } = await parent();
-	return db;
-};
+import { recipes } from '$lib/drizzle/schema';
+import { db } from '../../hooks.server';
 
 const hashed_password = (s) =>
 	s.split('').reduce((a, b) => {
@@ -62,6 +58,7 @@ export const actions: Actions = {
 		if (password === PASSWORD) {
 			// format the data, checking that the data is a string as data.get() can return a string, file or nul
 			const lowerCaseName = formatName(typeof name === 'string' ? name : '');
+			const formattedSource = formatName(typeof source === 'string' ? source : '');
 			const formattedIngredients = formatIngredients(
 				typeof ingredients === 'string' ? ingredients : ''
 			);
@@ -70,17 +67,27 @@ export const actions: Actions = {
 			// generate new recipe object
 			const newRecipe = {
 				name: lowerCaseName,
-				source: source,
+				source: formattedSource,
 				ingredients: formattedIngredients,
 				steps: formattedSteps
 			};
 
-			await db.insert(recipes).values({
-				name: newRecipe.name,
-				source: newRecipe.source,
-				ingredients: newRecipe.ingredients,
-				steps: newRecipe.steps
-			});
+			// check all values in newRecipe are not null
+			if (
+				newRecipe.name === null ||
+				newRecipe.source === null ||
+				newRecipe.ingredients === null ||
+				newRecipe.steps === null
+			) {
+				return fail(400, { message: 'Name, source, ingredients or steps are null in newRecipe.' });
+			} else {
+				await db.insert(recipes).values({
+					recipe_name: newRecipe.name,
+					source: newRecipe.source,
+					ingredients: newRecipe.ingredients,
+					steps: newRecipe.steps
+				});
+			}
 		}
 	}
 };
