@@ -1,4 +1,18 @@
 import type { Actions } from './$types';
+import { fail } from '@sveltejs/kit';
+import { PASSWORD } from '$env/static/private';
+import type {} from './$types';
+
+export const load: LayoutServerLoad = async ({ parent }) => {
+	const { db } = await parent();
+	return db;
+};
+
+const hashed_password = (s) =>
+	s.split('').reduce((a, b) => {
+		a = (a << 5) - a + b.charCodeAt(0);
+		return a & a;
+	}, 0);
 
 const formatName = (name: string) => {
 	// all lower case
@@ -15,7 +29,6 @@ const formatIngredients = (ingredients: string) => {
 const formatSteps = (steps: string) => {
 	// format the steps into an array by splitting at new lines or periods
 	const stepsArray = steps.split(/[\r\n.]/);
-
 
 	// drop any occurence of 'step' followed by a number
 	const filteredSteps = stepsArray.map((step) => step.replace(/STEP \d+\s*/i, ''));
@@ -34,26 +47,40 @@ export const actions: Actions = {
 		const data = await request.formData();
 
 		// get the data from the form
+		const password = data.get('password');
 		const name = data.get('name');
 		const source = data.get('source');
 		const ingredients = data.get('ingredients');
 		const steps = data.get('steps');
 
-		// format the data, checking that the data is a string as data.get() can return a string, file or nul
-		const lowerCaseName = formatName(typeof name === 'string' ? name : '');
-		const formattedIngredients = formatIngredients(
-			typeof ingredients === 'string' ? ingredients : ''
-		);
-		const formattedSteps = formatSteps(typeof steps === 'string' ? steps : '');
+		// check the password is right, where 'password' is user-entered and 'PASSWORD' is the env var
+		if (password !== PASSWORD) {
+			return fail(400, { message: 'Password incorrect' });
+		}
 
-		// generate new recipe object
-		const newRecipe = {
-			name: lowerCaseName,
-			source: source,
-			ingredients: formattedIngredients,
-			steps: formattedSteps
-		};
+		// this must be true as password null-checked above, but I want to leave as failsafe
+		if (password === PASSWORD) {
+			// format the data, checking that the data is a string as data.get() can return a string, file or nul
+			const lowerCaseName = formatName(typeof name === 'string' ? name : '');
+			const formattedIngredients = formatIngredients(
+				typeof ingredients === 'string' ? ingredients : ''
+			);
+			const formattedSteps = formatSteps(typeof steps === 'string' ? steps : '');
 
-		console.log('newRecipe', newRecipe);
+			// generate new recipe object
+			const newRecipe = {
+				name: lowerCaseName,
+				source: source,
+				ingredients: formattedIngredients,
+				steps: formattedSteps
+			};
+
+			await db.insert(recipes).values({
+				name: newRecipe.name,
+				source: newRecipe.source,
+				ingredients: newRecipe.ingredients,
+				steps: newRecipe.steps
+			});
+		}
 	}
 };

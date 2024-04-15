@@ -5,6 +5,7 @@
 		id: string;
 		name: string;
 		placeholder: string;
+		autocomplete: string;
 		required: boolean;
 	}>();
 

@@ -4,13 +4,15 @@
 </script>
 
 <form method="POST" use:enhance>
-	<FormField label="Name" type="text" id="name" name="name" placeholder="Recipe name" required />
+	<FormField label="Name" type="text" id="name" name="name" placeholder="Recipe name"
+	autocomplete="off" required />
 	<FormField
 		label="Source"
 		type="text"
 		id="source"
 		name="source"
 		placeholder="Recipe URL, book page, etc"
+		autocomplete="off"
 		required
 	/>
 	<FormField
@@ -18,7 +20,8 @@
 		type="textarea"
 		id="ingredients"
 		name="ingredients"
-		placeholder="Paste in ingredients- the app will format them"
+		placeholder="Paste in ingredients - the app will format them"
+		autocomplete="off"
 		required
 	/>
 	<FormField
@@ -27,6 +30,16 @@
 		id="steps"
 		name="steps"
 		placeholder="Paste in steps - the app will format them"
+		autocomplete="off"
+		required
+	/>
+	<FormField
+		label="Password"
+		type="password"
+		id="password"
+		name="password"
+		placeholder="Enter password"
+		autocomplete="off"
 		required
 	/>
 	<button type="submit">Submit</button>

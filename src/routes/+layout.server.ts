@@ -1,23 +1,13 @@
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
-import { DRIZZLE_DATABASE_URL } from '$env/static/private';
 import type { LayoutServerLoad } from './$types';
 import type { Recipe, IdAndNameAndSlug } from '$lib/types';
-
-import * as schema from '$lib/drizzle/schema';
+import { db } from '../hooks.server';
 
 export const load: LayoutServerLoad = async () => {
-	const sql = neon(DRIZZLE_DATABASE_URL);
-	// @ts-expect-error
-	const db = drizzle(sql, { schema });
-
 	const all_recipes: Recipe[] = await db.query.recipes.findMany();
 
 	// extract recipe_id and recipe_name into array
 	const id_and_names: [number, string][] = [];
 	all_recipes.forEach((recipe) => id_and_names.push([recipe.recipe_id, recipe.recipe_name]));
-
-
 
 	// generate a slug in camelCase from the name and generate a slug array
 	const slugs = id_and_names.map((name) => {
@@ -32,7 +22,6 @@ export const load: LayoutServerLoad = async () => {
 			slug: slugs[index]
 		};
 	});
-
 
 	return { all_recipes, id_and_names_and_slugs };
 };
