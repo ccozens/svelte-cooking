@@ -1,15 +1,9 @@
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
-import { DRIZZLE_DATABASE_URL } from '$env/static/private';
 import type { LayoutServerLoad } from './$types';
 import type { Recipe, IdAndNameAndSlug } from '$lib/types';
-
-import * as schema from '$lib/drizzle/schema';
+import { db } from '../hooks.server';
 
 export const load: LayoutServerLoad = async () => {
-	const sql = neon(DRIZZLE_DATABASE_URL);
-	// @ts-ignore
-	const db = drizzle(sql, { schema });
+
 
 	const all_recipes: Recipe[] = await db.query.recipes.findMany();
 
