@@ -1,11 +1,31 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import FormField from '$lib/components/common/FormField.svelte';
+
+	import { page } from '$app/stores';
 </script>
 
+{#if $page.data.session}
+	<h1>Protected page</h1>
+	<p>This is a protected content. You can access this content because you are signed in.</p>
+	<p>Session expiry: {$page.data.session?.expires}</p>
+{:else}
+	<h1>Access Denied</h1>
+	<p>
+		<a href="/auth/signin"> You must be signed in to view this page </a>
+	</p>
+{/if}
+
 <form method="POST" use:enhance>
-	<FormField label="Name" type="text" id="name" name="name" placeholder="Recipe name"
-	autocomplete="off" required />
+	<FormField
+		label="Name"
+		type="text"
+		id="name"
+		name="name"
+		placeholder="Recipe name"
+		autocomplete="off"
+		required
+	/>
 	<FormField
 		label="Source"
 		type="text"
