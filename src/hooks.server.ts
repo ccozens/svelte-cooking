@@ -12,22 +12,6 @@ export const db = drizzle(sql, { schema });
 import Google from '@auth/core/providers/google';
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, AUTH_SECRET } from '$env/static/private';
 
-/*
-export const {handle, signIn, signOut} = SvelteKitAuth(async () => {
-	const authOptions = {
-		providers: [
-			Google({
-				clientId: GOOGLE_CLIENT_ID,
-				clientSecret: GOOGLE_CLIENT_SECRET
-			})
-		],
-		secret: AUTH_SECRET,
-		trustHost: true
-	};
-	return authOptions;
-});
- */
-
 export async function getAuthOptions() {
 	const authOptions = {
 		providers: [
@@ -47,7 +31,7 @@ import { redirect, type Handle } from '@sveltejs/kit';
 import { handle as authenticationHandle } from './auth';
 import { sequence } from '@sveltejs/kit/hooks';
 
-async function authorizationHandle({ event, resolve }) {
+const authorizationHandle: Handle = async ({ event, resolve }) => {
 	// Protect any routes under /authenticated
 	if (event.url.pathname.startsWith('/authenticated')) {
 		const session = await event.locals.auth();
@@ -59,18 +43,16 @@ async function authorizationHandle({ event, resolve }) {
 
 	// If the request is still here, just proceed as normally
 	return resolve(event);
-}
+};
 
-function redirectHandle({ event, resolve }) {
+const redirectHandle: Handle = ({ event, resolve }) => {
 	// redirect from addRecipe to authenticated/addRecipe
 	if (event.url.pathname.startsWith('/addRecipe')) {
 		throw redirect(303, '/authenticated/addRecipe');
 	}
 	return resolve(event);
-}
+};
 // First handle authentication, then authorization
 // Each function acts as a middleware, receiving the request handle
 // And returning a handle which gets passed to the next function
 export const handle: Handle = sequence(redirectHandle, authenticationHandle, authorizationHandle);
-
-// export { handle } from "./auth"
