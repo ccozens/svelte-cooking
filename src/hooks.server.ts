@@ -8,20 +8,69 @@ const sql = neon(DRIZZLE_DATABASE_URL);
 // @ts-expect-error as sql causes a ts error
 export const db = drizzle(sql, { schema });
 
-// auth hooks
-import { SvelteKitAuth } from '@auth/sveltekit';
+// auth options
 import Google from '@auth/core/providers/google';
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, AUTH_SECRET } from '$env/static/private';
 
-const authOptions = {
-	providers: [
-		Google({
-			clientId: GOOGLE_CLIENT_ID,
-			clientSecret: GOOGLE_CLIENT_SECRET
-		})
-	],
-	secret: AUTH_SECRET,
-	trustHost: true
-};
+/*
+export const {handle, signIn, signOut} = SvelteKitAuth(async () => {
+	const authOptions = {
+		providers: [
+			Google({
+				clientId: GOOGLE_CLIENT_ID,
+				clientSecret: GOOGLE_CLIENT_SECRET
+			})
+		],
+		secret: AUTH_SECRET,
+		trustHost: true
+	};
+	return authOptions;
+});
+ */
 
-export const handle = SvelteKitAuth(authOptions);
+export async function getAuthOptions() {
+	const authOptions = {
+		providers: [
+			Google({
+				clientId: GOOGLE_CLIENT_ID,
+				clientSecret: GOOGLE_CLIENT_SECRET
+			})
+		],
+		secret: AUTH_SECRET,
+		trustHost: true
+	};
+	return authOptions;
+}
+
+// auth hooks https://authjs.dev/reference/sveltekit
+import { redirect, type Handle } from '@sveltejs/kit';
+import { handle as authenticationHandle } from './auth';
+import { sequence } from '@sveltejs/kit/hooks';
+
+async function authorizationHandle({ event, resolve }) {
+	// Protect any routes under /authenticated
+	if (event.url.pathname.startsWith('/authenticated')) {
+		const session = await event.locals.auth();
+		if (!session) {
+			// Redirect to the signin page
+			throw redirect(303, '/auth/signin');
+		}
+	}
+
+	// If the request is still here, just proceed as normally
+	return resolve(event);
+}
+
+function redirectHandle({ event, resolve }) {
+	// redirect from addRecipe to authenticated/addRecipe
+	if (event.url.pathname.startsWith('/addRecipe')) {
+		throw redirect(303, '/authenticated/addRecipe');
+	}
+	return resolve(event);
+}
+// First handle authentication, then authorization
+// Each function acts as a middleware, receiving the request handle
+// And returning a handle which gets passed to the next function
+export const handle: Handle = sequence(redirectHandle, authenticationHandle, authorizationHandle);
+
+// export { handle } from "./auth"

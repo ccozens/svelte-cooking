@@ -2,7 +2,7 @@ import type { Actions } from './$types';
 import { fail } from '@sveltejs/kit';
 import { PASSWORD } from '$env/static/private';
 import { recipes } from '$lib/drizzle/schema';
-import { db } from '../../hooks.server';
+import { db } from '../../../hooks.server';
 
 const hashed_password = (s) =>
 	s.split('').reduce((a, b) => {
@@ -91,3 +91,4 @@ export const actions: Actions = {
 		}
 	}
 };
+
