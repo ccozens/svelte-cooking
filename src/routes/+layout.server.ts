@@ -11,8 +11,6 @@ export const load: LayoutServerLoad = async () => {
 	const id_and_names: [number, string][] = [];
 	all_recipes.forEach((recipe) => id_and_names.push([recipe.recipe_id, recipe.recipe_name]));
 
-
-
 	// generate a slug in camelCase from the name and generate a slug array
 	const slugs = id_and_names.map((name) => {
 		return name[1].toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
@@ -26,7 +24,6 @@ export const load: LayoutServerLoad = async () => {
 			slug: slugs[index]
 		};
 	});
-
 
 	return { all_recipes, id_and_names_and_slugs };
 };
