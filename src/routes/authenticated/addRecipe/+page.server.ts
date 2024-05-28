@@ -1,14 +1,7 @@
 import type { Actions } from './$types';
 import { fail } from '@sveltejs/kit';
-import { PASSWORD } from '$env/static/private';
 import { recipes } from '$lib/drizzle/schema';
 import { db } from '../../../hooks.server';
-
-const hashed_password = (s) =>
-	s.split('').reduce((a, b) => {
-		a = (a << 5) - a + b.charCodeAt(0);
-		return a & a;
-	}, 0);
 
 const formatName = (name: string) => {
 	// all lower case
@@ -43,52 +36,42 @@ export const actions: Actions = {
 		const data = await request.formData();
 
 		// get the data from the form
-		const password = data.get('password');
 		const name = data.get('name');
 		const source = data.get('source');
 		const ingredients = data.get('ingredients');
 		const steps = data.get('steps');
 
-		// check the password is right, where 'password' is user-entered and 'PASSWORD' is the env var
-		if (password !== PASSWORD) {
-			return fail(400, { message: 'Password incorrect' });
-		}
+		// format the data, checking that the data is a string as data.get() can return a string, file or nul
+		const lowerCaseName = formatName(typeof name === 'string' ? name : '');
+		const formattedSource = formatName(typeof source === 'string' ? source : '');
+		const formattedIngredients = formatIngredients(
+			typeof ingredients === 'string' ? ingredients : ''
+		);
+		const formattedSteps = formatSteps(typeof steps === 'string' ? steps : '');
 
-		// this must be true as password null-checked above, but I want to leave as failsafe
-		if (password === PASSWORD) {
-			// format the data, checking that the data is a string as data.get() can return a string, file or nul
-			const lowerCaseName = formatName(typeof name === 'string' ? name : '');
-			const formattedSource = formatName(typeof source === 'string' ? source : '');
-			const formattedIngredients = formatIngredients(
-				typeof ingredients === 'string' ? ingredients : ''
-			);
-			const formattedSteps = formatSteps(typeof steps === 'string' ? steps : '');
+		// generate new recipe object
+		const newRecipe = {
+			name: lowerCaseName,
+			source: formattedSource,
+			ingredients: formattedIngredients,
+			steps: formattedSteps
+		};
 
-			// generate new recipe object
-			const newRecipe = {
-				name: lowerCaseName,
-				source: formattedSource,
-				ingredients: formattedIngredients,
-				steps: formattedSteps
-			};
-
-			// check all values in newRecipe are not null
-			if (
-				newRecipe.name === null ||
-				newRecipe.source === null ||
-				newRecipe.ingredients === null ||
-				newRecipe.steps === null
-			) {
-				return fail(400, { message: 'Name, source, ingredients or steps are null in newRecipe.' });
-			} else {
-				await db.insert(recipes).values({
-					recipe_name: newRecipe.name,
-					source: newRecipe.source,
-					ingredients: newRecipe.ingredients,
-					steps: newRecipe.steps
-				});
-			}
+		// check all values in newRecipe are not null
+		if (
+			newRecipe.name === null ||
+			newRecipe.source === null ||
+			newRecipe.ingredients === null ||
+			newRecipe.steps === null
+		) {
+			return fail(400, { message: 'Name, source, ingredients or steps are null in newRecipe.' });
+		} else {
+			await db.insert(recipes).values({
+				recipe_name: newRecipe.name,
+				source: newRecipe.source,
+				ingredients: newRecipe.ingredients,
+				steps: newRecipe.steps
+			});
 		}
 	}
 };
-
