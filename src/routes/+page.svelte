@@ -12,8 +12,9 @@
 <Header />
 <RecipeList items={id_and_names_and_slugs} />
 
+<a href="/addRecipe">
 <i class="fa-solid fa-circle-plus"></i>
-
+</a>
 <style lang="postcss">
 	i {
 		position: fixed;
