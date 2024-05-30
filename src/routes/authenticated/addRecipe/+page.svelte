@@ -33,15 +33,6 @@
 		autocomplete="off"
 		required
 	/>
-	<FormField
-		label="Password"
-		type="password"
-		id="password"
-		name="password"
-		placeholder="Enter password"
-		autocomplete="off"
-		required
-	/>
 	<button type="submit">Submit</button>
 </form>
 

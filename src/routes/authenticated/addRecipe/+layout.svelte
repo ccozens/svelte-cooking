@@ -4,8 +4,6 @@
     let { session }      = data;
 
     let { name }         = session.user;
-    $: console.log(session.user);
-    $: console.log(name);
     let isLoggedIn = $state(true);
 
 
